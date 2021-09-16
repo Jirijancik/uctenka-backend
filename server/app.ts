@@ -41,6 +41,6 @@ app.use(router.routes()).use(router.allowedMethods());
     console.error('Unable to connect to database');
   }
 
-  await app.listen(config.port);
+  app.listen(config.port);
   console.log(`Server started on port ${config.port}`);
 })();
