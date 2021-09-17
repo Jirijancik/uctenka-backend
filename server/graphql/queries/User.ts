@@ -9,7 +9,7 @@ import { Client, IClient } from '../types/Client';
 import { Next, Context } from 'koa';
 import { Client as ClientModel } from '../../models';
 
-export async function getClients(ctx: Context, next: Next) {
+export async function getUser(ctx: Context, next: Next) {
   const clients = ClientModel.find();
 
   return (ctx.body = clients);

@@ -1,10 +1,5 @@
-import {
-  GraphQLObjectType,
-  GraphQLID,
-  GraphQLString,
-  GraphQLList,
-} from 'graphql';
-import { Client } from '../type_definitions/Client';
+import { GraphQLID, GraphQLString } from 'graphql';
+import { Client } from '../types/Client';
 import { Client as ClientModel } from '../../models';
 
 export const CREATE_CLIENT = {

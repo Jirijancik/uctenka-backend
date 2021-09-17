@@ -4,11 +4,13 @@ import * as cors from '@koa/cors';
 import * as graphqlHTTP from 'koa-graphql';
 import * as Router from 'koa-router';
 
+import * as jwt from 'jsonwebtoken';
+
 import { connectDatabase } from './db';
 import { development, /* test , */ production } from './db/config';
 
 import { config } from './config';
-import { createRoutes } from './middlewares/routes';
+//import { createRoutes } from './middlewares/routes';
 import { schema } from './graphql';
 
 const databaseConfig =

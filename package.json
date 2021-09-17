@@ -13,6 +13,9 @@
   "license": "ISC",
   "dependencies": {
     "@koa/cors": "^2.2.2",
+    "bcrypt": "^5.0.1",
+    "dotenv": "^10.0.0",
+    "jsonwebtoken": "^8.5.1",
     "koa": "^2.5.2",
     "koa-body": "^2.6.0",
     "koa-bodyparser": "^4.3.0",
@@ -22,6 +25,7 @@
     "typescript": "^4.4.3"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.5",
     "@types/koa__cors": "^3.0.3",
     "@types/koa-bodyparser": "^4.3.3",
     "@types/koa-graphql": "^0.8.5",
