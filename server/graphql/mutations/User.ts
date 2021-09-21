@@ -1,5 +1,5 @@
 import { GraphQLString } from 'graphql';
-import { User } from '../types/User';
+import { User } from '../type_defs/User';
 import { User as UserModel } from '../../models';
 
 export const REGISTER_USER = {
@@ -20,5 +20,24 @@ export const REGISTER_USER = {
       return await UserModel.find();
     }
     throw new Error('User already exists');
+  },
+};
+
+export const LOGIN_USER = {
+  type: User,
+  args: {
+    email: { type: GraphQLString },
+    password: { type: GraphQLString },
+  },
+  async resolve(xxx: any, args: any, context: any) {
+    console.log(xxx, args, context);
+    // const { email, password } = args;
+
+    // let user = await UserModel.findOne({ email });
+
+    // if (user) {
+
+    // }
+    // throw new Error('User already exists');
   },
 };

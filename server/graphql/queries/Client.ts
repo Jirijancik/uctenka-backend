@@ -4,7 +4,7 @@ import {
   GraphQLString,
   GraphQLList,
 } from 'graphql';
-import { Client, IClient } from '../types/Client';
+import { Client, IClient } from '../type_defs/Client';
 
 import { Next, Context } from 'koa';
 import { Client as ClientModel } from '../../models';

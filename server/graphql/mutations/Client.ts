@@ -1,5 +1,5 @@
 import { GraphQLID, GraphQLString } from 'graphql';
-import { Client } from '../types/Client';
+import { Client } from '../type_defs/Client';
 import { Client as ClientModel } from '../../models';
 
 export const CREATE_CLIENT = {

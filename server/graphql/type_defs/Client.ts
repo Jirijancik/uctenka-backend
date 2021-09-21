@@ -1,4 +1,7 @@
 import { GraphQLObjectType, GraphQLString, GraphQLID } from 'graphql';
+import { gql } from 'apollo-server-koa';
+
+const typeDefs = gql``;
 
 export interface IClient {
   name: string;
