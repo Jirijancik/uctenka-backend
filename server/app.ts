@@ -74,3 +74,33 @@ server.applyMiddleware({ app });
   app.listen(config.port);
   console.log(`Server started on port ${config.port}`);
 })();
+
+// trial
+
+const port = 4000;
+const app = express();
+
+app.use(
+  expressJwt({
+    secret: 'SUPER_SECRET',
+    algorithms: ['HS256'],
+    credentialsRequired: false,
+  })
+);
+
+const server = new ApolloServer({
+  schema: applyMiddleware(
+    makeExecutableSchema({ typeDefs, resolvers }),
+    permissions
+  ),
+  context: ({ req }) => {
+    const user = req.user || null;
+    return { user };
+  },
+});
+
+server.applyMiddleware({ app });
+
+app.listen({ port }, () => {
+  console.log(`Server ready at http://localhost:${port}${server.graphqlPath}`);
+});
