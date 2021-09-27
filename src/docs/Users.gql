@@ -1,0 +1,50 @@
+# Mutation to Register a new User in the Database
+mutation REGISTER_USER(
+  $email: String!
+  $username: String!
+  $password: String!
+  $firstName: String!
+  $lastName: String!
+) {
+  registerUser(
+    newUser: {
+      email: $email
+      username: $username
+      password: $password
+      lastName: $lastName
+      firstName: $firstName
+    }
+  ) {
+    token
+    user {
+      id
+      email
+      username
+      lastName
+      firstName
+    }
+  }
+}
+
+# Query to Authenticate the User
+query LOGIN_USER($username: String!, $password: String!) {
+  loginUser(username: $username, password: $password) {
+    token
+    user {
+      id
+      email
+      firstName
+      lastName
+    }
+  }
+}
+
+# Query to Fetch the Authenticated User by Token
+query AUTH_USER {
+  authUser {
+    id
+    lastName
+    username
+    firstName
+  }
+}

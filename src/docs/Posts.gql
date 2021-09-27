@@ -1,0 +1,64 @@
+# Muration to Create a new Post
+mutation NEW_POST($title: String!, $content: String!, $featuredImage: String) {
+  createPost(
+    newPost: { title: $title, content: $content, featuredImage: $featuredImage }
+  ) {
+    id
+    title
+    content
+    createdAt
+  }
+}
+
+# Query to Fetch all the Posts
+query ALL_POSTS {
+  allPosts {
+    id
+    title
+    content
+    createdAt
+    updatedAt
+  }
+}
+
+# Query to Fetch single Post by ID
+query POST_BY_ID($id: ID!) {
+  getPostById(id: $id) {
+    title
+    content
+    createdAt
+    updatedAt
+    featuredImage
+    author {
+      id
+      username
+      firstName
+    }
+  }
+}
+
+# Mutation to Update the Post (Authentication Required)
+mutation UPDATE_POST_BY_ID(
+  $id: ID!
+  $title: String!
+  $content: String!
+  $featuredImage: String
+) {
+  updatePost(
+    id: $id
+    updatedPost: {
+      title: $title
+      content: $content
+      featuredImage: $featuredImage
+    }
+  ) {
+    id
+    title
+    content
+    featuredImage
+    author {
+      id
+      username
+    }
+  }
+}
