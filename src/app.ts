@@ -10,12 +10,14 @@ import typeDefs from './graphql/typeDefs';
 import resolvers from './graphql/resolvers';
 import AuthMiddleware from './middlewares/auth';
 import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
+import cors from 'cors';
 
 const app = express();
 // Remove x-powered-by header
 app.disable('x-powered-by');
 app.use(AuthMiddleware);
 app.use(express.json());
+app.use(cors());
 
 // Set Express Static Directory
 app.use(express.static(join(__dirname, './uploads')));
