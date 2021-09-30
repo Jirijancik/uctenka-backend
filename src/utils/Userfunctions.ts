@@ -4,7 +4,7 @@ import { sign } from 'jsonwebtoken';
 
 import { SECRET } from '../config';
 
-export const issueAuthToken = async (jwtPayload) => {
+export const issueAuthToken = async (jwtPayload: string) => {
   let token = await sign(jwtPayload, SECRET, {
     expiresIn: 3600 * 24,
   });
