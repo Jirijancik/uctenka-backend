@@ -4,10 +4,7 @@ import { ApolloError } from 'apollo-server-express';
 
 import { serializeUser, issueAuthToken } from '../../utils/Userfunctions';
 
-import {
-  UserRegisterationRules,
-  UserAuthenticationRules,
-} from '../../validation/user';
+import { UserRegisterationRules, UserAuthenticationRules } from '../../validation/user';
 
 export default {
   // Standarad User Query Property
@@ -19,10 +16,7 @@ export default {
      */
     loginUser: async (_, { username, password }, { User }) => {
       // Validate Incoming User Credentials
-      await UserAuthenticationRules.validate(
-        { username, password },
-        { abortEarly: false }
-      );
+      await UserAuthenticationRules.validate({ username, password }, { abortEarly: false });
       // Find the user from the database
       let user = await User.findOne({
         username,
@@ -32,14 +26,14 @@ export default {
         throw new ApolloError('Username or password were incorrect', '404');
       }
       // If user is found then compare the password
-      let isMatch = await compare(password, user.password);
+      const isMatch = await compare(password, user.password);
       // If Password don't match
       if (!isMatch) {
         throw new ApolloError('Username or password were incorrect', '403');
       }
       user = await serializeUser(user);
       // Issue Token
-      let token = await issueAuthToken(user);
+      const token = await issueAuthToken(user);
       return {
         user,
         token,
@@ -61,7 +55,7 @@ export default {
      */
     registerUser: async (_, { newUser }, { User }) => {
       try {
-        let { email, username } = newUser;
+        const { email, username } = newUser;
 
         // Validate Incoming New User Arguments
         await UserRegisterationRules.validate(newUser, { abortEarly: false });
@@ -92,7 +86,7 @@ export default {
         let result = await user.save();
         result = await serializeUser(result);
         // Issue Token
-        let token = await issueAuthToken(result);
+        const token = await issueAuthToken(result);
         return {
           token,
           user: result,

@@ -16,15 +16,9 @@ const firstName = yup
   .required('First Name is required.')
   .min(3, 'First name should have atleast 3 characters.');
 
-const lastName = yup
-  .string()
-  .required('Last name is required.')
-  .min(3, 'Last name should have atleast 3 characters.');
+const lastName = yup.string().required('Last name is required.').min(3, 'Last name should have atleast 3 characters.');
 
-const email = yup
-  .string()
-  .required('Email is required.')
-  .email('This is invalid email.');
+const email = yup.string().required('Email is required.').email('This is invalid email.');
 
 const password = yup
   .string()

@@ -1,6 +1,5 @@
-import { NewPostRules } from '../../validation/post';
-
 import { ApolloError } from 'apollo-server-express';
+import { NewPostRules } from '../../validation/post';
 
 const PostLabels = {
   docs: 'posts',
@@ -21,7 +20,7 @@ export default {
      * @Access Public
      */
     allPosts: async (_, {}, { Post }) => {
-      let posts = await Post.find().populate('author');
+      const posts = await Post.find().populate('author');
       return posts;
     },
     /**
@@ -29,7 +28,7 @@ export default {
      * @Access Public
      */
     getPostById: async (_, { id }, { Post }) => {
-      let post = await Post.findById(id).populate('author');
+      const post = await Post.findById(id).populate('author');
       return post;
     },
     /**
@@ -54,7 +53,7 @@ export default {
         };
       }
 
-      let posts = await Post.paginate(query, options);
+      const posts = await Post.paginate(query, options);
 
       return posts;
     },
@@ -73,11 +72,11 @@ export default {
         populate: 'author',
       };
 
-      let posts = await Post.paginate(
+      const posts = await Post.paginate(
         {
           author: user.id,
         },
-        options
+        options,
       );
 
       return posts;
@@ -104,7 +103,7 @@ export default {
         },
         {
           abortEarly: false,
-        }
+        },
       );
       // Once the Validations are passed Create New Post
       const post = new Post({
@@ -130,7 +129,7 @@ export default {
          */
     updatePost: async (_, { updatedPost, id }, { Post, user }) => {
       try {
-        let { title, content } = updatedPost;
+        const { title, content } = updatedPost;
 
         await NewPostRules.validate(
           {
@@ -139,10 +138,10 @@ export default {
           },
           {
             abortEarly: false,
-          }
+          },
         );
 
-        let post = await Post.findOneAndUpdate(
+        const post = await Post.findOneAndUpdate(
           {
             _id: id,
             author: user.id,
@@ -150,7 +149,7 @@ export default {
           updatedPost,
           {
             new: true,
-          }
+          },
         );
 
         if (!post) {
@@ -172,7 +171,7 @@ export default {
      */
     deletePost: async (_, { id }, { Post, user }) => {
       try {
-        let post = await Post.findOneAndDelete({
+        const post = await Post.findOneAndDelete({
           _id: id,
           author: user.id,
         });

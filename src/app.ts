@@ -1,16 +1,16 @@
 import { join } from 'path';
 import consola from 'consola';
-import { DB, PORT, IN_PROD } from './config';
 import { ApolloServer } from 'apollo-server-express';
-//import { schemaDirectives } from './graphql/directives';
 import express from 'express';
 import mongoose from 'mongoose';
+import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
+import cors from 'cors';
+import { DB, PORT, IN_PROD } from './config';
+// import { schemaDirectives } from './graphql/directives';
 import appModels from './models';
 import typeDefs from './graphql/typeDefs';
 import resolvers from './graphql/resolvers';
 import AuthMiddleware from './middlewares/auth';
-import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
-import cors from 'cors';
 
 const app = express();
 // Remove x-powered-by header
@@ -29,7 +29,7 @@ const server = new ApolloServer({
   // schemaDirectives,
   playground: !IN_PROD,
   context: ({ req }) => {
-    let { user, isAuth } = req;
+    const { user, isAuth } = req;
 
     return {
       req,
@@ -65,7 +65,7 @@ const startApp = async () => {
       consola.success({
         badge: true,
         message: `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`,
-      })
+      }),
     );
   } catch (err) {
     consola.error({

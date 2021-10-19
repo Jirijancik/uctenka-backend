@@ -1,15 +1,9 @@
 {
-  "extends": "airbnb/base",
-  "parser": "babel-eslint",
-  "rules": {
-    "no-console": 0,
-    "max-len": "off",
-    "no-return-assign": "off",
-    "no-param-reassign": [2, { "props": false }],
-    "no-underscore-dangle": ["error", { "allow": ["_id"] }],
-    "comma-dangle": "off",
-    "function-paren-newline": "off",
-    "arrow-parens": "off"
+  "extends": ["george-lint/typescript"],
+  "parserOptions": {
+    "project": "tsconfig.json",
+    "tsconfigRootDir": ".",
+    "sourceType": "module"
   },
   "env": {
     "mocha": true

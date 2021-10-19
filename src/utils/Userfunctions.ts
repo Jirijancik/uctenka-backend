@@ -1,15 +1,12 @@
-import { pick } from 'lodash';
-
 import { sign } from 'jsonwebtoken';
-
+import { pick } from 'lodash';
 import { SECRET } from '../config';
 
 export const issueAuthToken = async (jwtPayload: string) => {
-  let token = await sign(jwtPayload, SECRET, {
+  const token = await sign(jwtPayload, SECRET, {
     expiresIn: 3600 * 24,
   });
   return `Bearer ${token}`;
 };
 
-export const serializeUser = (user) =>
-  pick(user, ['id', 'email', 'username', 'lastName', 'firstName']);
+export const serializeUser = user => pick(user, ['id', 'email', 'username', 'lastName', 'firstName']);

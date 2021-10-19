@@ -1,8 +1,6 @@
-import { SECRET } from '../config';
-
-import appModels from '../models';
-
 import { verify } from 'jsonwebtoken';
+import { SECRET } from '../config';
+import appModels from '../models';
 
 /**
  * Custom User Authentication Middleware
@@ -39,7 +37,7 @@ const AuthMiddleware = async (req, res, next) => {
   }
 
   // If the user has valid token then Find the user by decoded token's id
-  let authUser = await appModels.User.findById(decodedToken.id);
+  const authUser = await appModels.User.findById(decodedToken.id);
   if (!authUser) {
     req.isAuth = false;
     return next();

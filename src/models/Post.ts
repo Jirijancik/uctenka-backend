@@ -19,7 +19,7 @@ const PostSchema = new Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 PostSchema.plugin(Paginate);

@@ -5,8 +5,8 @@ export default {
      * @Access Private
      */
     getClients: async (_, {}, { Client }) => {
-      let clients = await Client.find();
-console.log(clients)
+      const clients = await Client.find();
+      console.log(clients);
       if (!clients) {
         throw new Error('Unathorized Access');
       }
