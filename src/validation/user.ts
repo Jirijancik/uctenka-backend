@@ -28,7 +28,6 @@ const password = yup
 
 // User Registeration Validation Schema
 export const UserRegisterationRules = yup.object().shape({
-  username,
   password,
   firstName,
   lastName,

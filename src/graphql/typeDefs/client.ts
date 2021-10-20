@@ -7,9 +7,22 @@ export default gql`
 
   type Client {
     _id: ID!
-    name: String
-    adress: String
-    ico: String
+    userId: ID!
+    name: String!
+    unifiedVatNumber: Number!
+    vatNumber: Number
+    currency: Number!
+    accountBalance: Number!
+    paymentTerms: String
+    contactPerson: String
+    email: String!
+    country: String!
+    street: String!
+    city: String!
+    postcode: String!
+    mobilePhone: String!
+    typeOfBussiness: String!
+    paymentMethod: String!
     createdAt: String
     updatedAt: String
   }

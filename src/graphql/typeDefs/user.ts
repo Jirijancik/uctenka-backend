@@ -3,7 +3,7 @@ import { gql } from 'apollo-server-express';
 export default gql`
   extend type Query {
     authUser: User! @isAuth
-    loginUser(username: String!, password: String!): AuthUser!
+    loginUser(email: String!, password: String!): AuthUser!
   }
 
   extend type Mutation {
@@ -12,7 +12,6 @@ export default gql`
 
   input UserInput {
     email: String!
-    username: String!
     lastName: String!
     password: String!
     firstName: String!
@@ -21,11 +20,11 @@ export default gql`
   type User {
     id: ID!
     email: String!
-    username: String!
     lastName: String!
     firstName: String!
     createdAt: String
     updatedAt: String
+    clients: [ID]
   }
 
   type AuthUser {

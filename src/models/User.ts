@@ -22,6 +22,7 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    clients: [Schema.Types.ObjectId],
   },
   {
     timestamps: true,

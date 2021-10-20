@@ -1,25 +1,22 @@
-import { hash, compare } from 'bcryptjs';
-
 import { ApolloError } from 'apollo-server-express';
-
-import { serializeUser, issueAuthToken } from '../../utils/Userfunctions';
-
-import { UserRegisterationRules, UserAuthenticationRules } from '../../validation/user';
+import { compare, hash } from 'bcryptjs';
+import { issueAuthToken, serializeUser } from '../../utils/Userfunctions';
+import { UserAuthenticationRules, UserRegisterationRules } from '../../validation/user';
 
 export default {
   // Standarad User Query Property
   Query: {
     /**
      * @DESC to authenticate using parameters
-     * @Params { username, password }
+     * @Params { email, password }
      * @Access Public
      */
-    loginUser: async (_, { username, password }, { User }) => {
+    loginUser: async (_, { email, password }, { User }) => {
       // Validate Incoming User Credentials
-      await UserAuthenticationRules.validate({ username, password }, { abortEarly: false });
+      await UserAuthenticationRules.validate({ email, password }, { abortEarly: false });
       // Find the user from the database
       let user = await User.findOne({
-        username,
+        email,
       });
       // If User is not found
       if (!user) {
@@ -50,19 +47,19 @@ export default {
   Mutation: {
     /**
      * @DESC to Register new user
-     * @Params newUser{ username, firstName, lastName, email, password }
+     * @Params newUser{ firstName, lastName, email, password }
      * @Access Public
      */
     registerUser: async (_, { newUser }, { User }) => {
       try {
-        const { email, username } = newUser;
+        const { email } = newUser;
 
         // Validate Incoming New User Arguments
         await UserRegisterationRules.validate(newUser, { abortEarly: false });
 
         // Check if the Username is taken
         let user = await User.findOne({
-          username,
+          email,
         });
         if (user) {
           throw new ApolloError('Username is already taken.', '403');
