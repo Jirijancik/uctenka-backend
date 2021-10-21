@@ -1,6 +1,26 @@
 import { model, Schema } from 'mongoose';
 
-const ClientSchema = new Schema(
+interface Client {
+  userId: Schema.Types.ObjectId;
+  name: string;
+  unifiedVatNumber: number;
+  vatNumber?: number;
+  currency: number;
+  accountBalance: number;
+  paymentTerms?: string;
+  contactPerson?: string;
+  email: string;
+  country: string;
+  street: string;
+  city: string;
+  postcode: number;
+  mobilePhone: string;
+  typeOfBussiness?: string;
+  accountNumber?: number;
+  paymentMethod?: string;
+}
+
+const ClientSchema = new Schema<Client>(
   {
     userId: {
       type: Schema.Types.ObjectId,
@@ -48,7 +68,7 @@ const ClientSchema = new Schema(
       required: true,
     },
     postcode: {
-      type: String,
+      type: Number,
       required: true,
     },
     mobilePhone: {
@@ -70,4 +90,4 @@ const ClientSchema = new Schema(
   },
 );
 
-export const Client = model('clients', ClientSchema);
+export const ClientModel = model<Client>('clients', ClientSchema);

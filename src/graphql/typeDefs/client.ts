@@ -9,20 +9,21 @@ export default gql`
     _id: ID!
     userId: ID!
     name: String!
-    unifiedVatNumber: Number!
-    vatNumber: Number
-    currency: Number!
-    accountBalance: Number!
+    unifiedVatInt: Int!
+    vatInt: Int
+    currency: Int!
+    accountBalance: Int!
     paymentTerms: String
     contactPerson: String
     email: String!
     country: String!
     street: String!
     city: String!
-    postcode: String!
+    postcode: Int!
     mobilePhone: String!
-    typeOfBussiness: String!
-    paymentMethod: String!
+    typeOfBussiness: String
+    accountInt: Int
+    paymentMethod: String
     createdAt: String
     updatedAt: String
   }

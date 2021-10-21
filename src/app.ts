@@ -1,16 +1,16 @@
-import { join } from 'path';
-import consola from 'consola';
+import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 import { ApolloServer } from 'apollo-server-express';
+import consola from 'consola';
+import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
-import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
-import cors from 'cors';
-import { DB, PORT, IN_PROD } from './config';
+import { join } from 'path';
+import { DB, IN_PROD, PORT } from './config';
+import resolvers from './graphql/resolvers';
+import typeDefs from './graphql/typeDefs';
+import AuthMiddleware from './middlewares/auth';
 // import { schemaDirectives } from './graphql/directives';
 import appModels from './models';
-import typeDefs from './graphql/typeDefs';
-import resolvers from './graphql/resolvers';
-import AuthMiddleware from './middlewares/auth';
 
 const app = express();
 // Remove x-powered-by header
@@ -39,7 +39,7 @@ const server = new ApolloServer({
     };
   },
   plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
-} as any);
+});
 
 // Function to start express and apollo server
 const startApp = async () => {
