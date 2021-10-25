@@ -11,11 +11,11 @@ export default {
      * @Params { email, password }
      * @Access Public
      */
-    loginUser: async (_, { email, password }, { User }) => {
+    loginUser: async (_, { email, password }, { UserModel }) => {
       // Validate Incoming User Credentials
       await UserAuthenticationRules.validate({ email, password }, { abortEarly: false });
       // Find the user from the database
-      let user = await User.findOne({
+      let user = await UserModel.findOne({
         email,
       });
       // If User is not found
@@ -50,7 +50,7 @@ export default {
      * @Params newUser{ firstName, lastName, email, password }
      * @Access Public
      */
-    registerUser: async (_, { newUser }, { User }) => {
+    registerUser: async (_, { newUser }, { UserModel }) => {
       try {
         const { email } = newUser;
 
@@ -58,7 +58,7 @@ export default {
         await UserRegisterationRules.validate(newUser, { abortEarly: false });
 
         // Check if the Username is taken
-        let user = await User.findOne({
+        let user = await UserModel.findOne({
           email,
         });
         if (user) {
@@ -66,7 +66,7 @@ export default {
         }
 
         // Check is the Email address is already registred
-        user = await User.findOne({
+        user = await UserModel.findOne({
           email,
         });
         if (user) {
@@ -74,7 +74,7 @@ export default {
         }
 
         // New User's Account can be created
-        user = new User(newUser);
+        user = new UserModel(newUser);
 
         // Hash the user password
         user.password = await hash(user.password, 10);

@@ -1,5 +1,5 @@
 import { ClientModel } from './Client';
 import { Post } from './Post';
-import { User } from './User';
+import { UserModel } from './User';
 
-export default { Post, User, ClientModel };
+export default { Post, UserModel, ClientModel };

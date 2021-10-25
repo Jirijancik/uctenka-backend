@@ -67,6 +67,8 @@ const startApp = async () => {
         message: `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`,
       }),
     );
+
+    //generateData()
   } catch (err) {
     consola.error({
       badge: true,

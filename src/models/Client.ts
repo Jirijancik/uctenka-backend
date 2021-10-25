@@ -1,13 +1,17 @@
 import { model, Schema } from 'mongoose';
+import { BusinessType } from '../types/businessType';
+import { Currency } from '../types/currency';
+import { PaymentMethod } from '../types/paymentMethod';
+import { PaymentTerms } from '../types/paymentTerms';
 
 interface Client {
   userId: Schema.Types.ObjectId;
   name: string;
   unifiedVatNumber: number;
   vatNumber?: number;
-  currency: number;
+  currency: Currency;
   accountBalance: number;
-  paymentTerms?: string;
+  paymentTerms?: PaymentTerms;
   contactPerson?: string;
   email: string;
   country: string;
@@ -15,9 +19,9 @@ interface Client {
   city: string;
   postcode: number;
   mobilePhone: string;
-  typeOfBussiness?: string;
+  typeOfBussiness?: BusinessType;
   accountNumber?: number;
-  paymentMethod?: string;
+  paymentMethod?: PaymentMethod;
 }
 
 const ClientSchema = new Schema<Client>(
@@ -38,7 +42,7 @@ const ClientSchema = new Schema<Client>(
       type: Number,
     },
     currency: {
-      type: Number,
+      type: String,
       required: true,
     },
     accountBalance: {
@@ -46,7 +50,7 @@ const ClientSchema = new Schema<Client>(
       required: true,
     },
     paymentTerms: {
-      type: String,
+      type: Number,
     },
     contactPerson: {
       type: String,
@@ -76,13 +80,13 @@ const ClientSchema = new Schema<Client>(
       required: true,
     },
     typeOfBussiness: {
-      type: String,
+      type: Number,
     },
     accountNumber: {
       type: Number,
     },
     paymentMethod: {
-      type: String,
+      type: Number,
     },
   },
   {
