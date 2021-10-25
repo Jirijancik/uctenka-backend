@@ -36,6 +36,6 @@ export const UserRegisterationRules = yup.object().shape({
 
 // User Authentication Validation Schema
 export const UserAuthenticationRules = yup.object().shape({
-  username,
+  email,
   password,
 });

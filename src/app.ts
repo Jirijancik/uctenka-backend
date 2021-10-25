@@ -39,7 +39,7 @@ const server = new ApolloServer({
     };
   },
   plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
-});
+} as any);
 
 // Function to start express and apollo server
 const startApp = async () => {

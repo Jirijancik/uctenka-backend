@@ -20,13 +20,13 @@ export default {
       });
       // If User is not found
       if (!user) {
-        throw new ApolloError('Username or password were incorrect', '404');
+        throw new ApolloError('Email or password were incorrect', '404');
       }
       // If user is found then compare the password
       const isMatch = await compare(password, user.password);
       // If Password don't match
       if (!isMatch) {
-        throw new ApolloError('Username or password were incorrect', '403');
+        throw new ApolloError('Email or password were incorrect', '403');
       }
       user = await serializeUser(user);
       // Issue Token
@@ -62,7 +62,7 @@ export default {
           email,
         });
         if (user) {
-          throw new ApolloError('Username is already taken.', '403');
+          throw new ApolloError('email is already taken.', '403');
         }
 
         // Check is the Email address is already registred
