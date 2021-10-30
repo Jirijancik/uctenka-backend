@@ -8,15 +8,16 @@ import { BASIC_USERS, generateBasicUsers } from "./user";
 
 export const generateBasicClients = async () => {
   console.log("STARTING CREATING CLIENTS");
+  const basicUsers = await BASIC_USERS()
 
   try {
-    let firstUser = await UserModel.findOne({ email: BASIC_USERS[0].email });
-    let secondUser = await UserModel.findOne({ email: BASIC_USERS[1].email });
+    let firstUser = await UserModel.findOne({ email: basicUsers[0].email });
+    let secondUser = await UserModel.findOne({ email: basicUsers[1].email });
 
     if (!firstUser || !secondUser) {
       await generateBasicUsers();
-      firstUser = await UserModel.findOne({ email: BASIC_USERS[0].email });
-      secondUser = await UserModel.findOne({ email: BASIC_USERS[1].email });
+      firstUser = await UserModel.findOne({ email: basicUsers[0].email });
+      secondUser = await UserModel.findOne({ email: basicUsers[1].email });
     }
 
     const existingClients = await ClientModel.find();

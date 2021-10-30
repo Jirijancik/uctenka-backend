@@ -13,17 +13,22 @@ export default {
      */
     loginUser: async (_, { email, password }, { UserModel }) => {
       // Validate Incoming User Credentials
+      
       await UserAuthenticationRules.validate({ email, password }, { abortEarly: false });
       // Find the user from the database
       let user = await UserModel.findOne({
         email,
       });
+      
       // If User is not found
       if (!user) {
         throw new ApolloError('Email or password were incorrect', '404');
       }
+
       // If user is found then compare the password
       const isMatch = await compare(password, user.password);
+      console.log(user, password, isMatch);
+      
       // If Password don't match
       if (!isMatch) {
         throw new ApolloError('Email or password were incorrect', '403');

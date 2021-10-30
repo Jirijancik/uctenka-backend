@@ -68,7 +68,7 @@ const startApp = async () => {
       }),
     );
 
-    //generateData()
+   // generateData()
   } catch (err) {
     consola.error({
       badge: true,

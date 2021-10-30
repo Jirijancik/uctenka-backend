@@ -1,12 +1,13 @@
+import { hash } from 'bcryptjs';
 import { UserModel } from "../src/models/User";
 
-export const BASIC_USERS = [
+export const BASIC_USERS = async() => [
   {
     username: "testtest",
     email: "test@test.cz",
     firstName: "Karel",
     lastName: "Doe",
-    password: "testtest",
+    password: await hash("test2test", 10),
     clients: [],
   },
   {
@@ -14,7 +15,7 @@ export const BASIC_USERS = [
     email: "test2@test.cz",
     firstName: "Petr",
     lastName: "Eod",
-    password: "test2test",
+    password: await hash("test2test", 10),
     clients: [],
   },
 ];
@@ -25,12 +26,14 @@ export const generateBasicUsers = async () => {
   const firstUser = await UserModel.findOne({ username: "testtest" });
   const secondUser = await UserModel.findOne({ username: "test2test" });
 
+  const userData = await BASIC_USERS()
+
   if(firstUser || secondUser){
     await UserModel.deleteMany()
   }
 
   try {
-    await UserModel.create(...BASIC_USERS);
+    await UserModel.create(...userData);
   } catch (error) {
     console.error(error);
   } finally {
