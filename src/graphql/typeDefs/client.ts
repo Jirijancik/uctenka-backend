@@ -2,15 +2,15 @@ import { gql } from 'apollo-server-express';
 
 export default gql`
   extend type Query {
-    getClients: [Client]! @isAuth
+    getClients: [Client] @isAuth
   }
 
   type Client {
     _id: ID!
     userId: ID!
     name: String!
-    unifiedVatInt: Int!
-    vatInt: Int
+    unifiedVatNumber: Int!
+    vatNumber: Int
     currency: Int!
     accountBalance: Int!
     paymentTerms: String
@@ -22,7 +22,7 @@ export default gql`
     postcode: Int!
     mobilePhone: String!
     typeOfBussiness: String
-    accountInt: Int
+    accountNumber: Int
     paymentMethod: String
     createdAt: String
     updatedAt: String

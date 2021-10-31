@@ -7,17 +7,17 @@ export default {
      * @Access Private
      */
     getClients: async (parent, args, ctx, info): Promise<any> => {
-      //const clients = await Client.find();
-
       const { ClientModel } = ctx
+      const clients = await ClientModel.find();
+
 
       console.log("Hello", info);
 
-      // if (!clients) {
-      //   throw new Error('Unathorized Access');
-      // }
+      if (!clients) {
+        throw new Error('Unathorized Access');
+      }
 
-     // return clients;
+      return clients;
     },
   },
 };
