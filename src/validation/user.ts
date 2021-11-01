@@ -4,13 +4,6 @@ import * as yup from 'yup';
  * USER MODEL Validation Rules
  */
 
-const username = yup
-  .string()
-  .required('Username is required.')
-  .min(5, 'Username should have atleast 5 characters.')
-  .max(30, 'Username should have atmost 10 characters.')
-  .matches(/^\w+$/, 'Should be alphanumeric.');
-
 const firstName = yup
   .string()
   .required('First Name is required.')
@@ -28,10 +21,10 @@ const password = yup
 
 // User Registeration Validation Schema
 export const UserRegisterationRules = yup.object().shape({
-  password,
+  email,
   firstName,
   lastName,
-  email,
+  password,
 });
 
 // User Authentication Validation Schema

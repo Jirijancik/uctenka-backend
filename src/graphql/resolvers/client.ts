@@ -1,5 +1,8 @@
 /* eslint-disable no-empty-pattern */
 
+import { ApolloError } from "apollo-server-errors";
+import { ClientCreationRules } from "../../validation/client";
+
 export default {
   Query: {
     /**
@@ -20,4 +23,39 @@ export default {
       return clients;
     },
   },
+
+// Standarad User Mutation Property
+Mutation: {
+  /**
+   * @DESC to Create new client
+   * @Params newUser
+   * @Access Private
+   */
+  createClient: async (_, { newClient }, { ClientModel }) => {
+    try {
+      const { name } = newClient;
+
+      // Validate Incoming New User Arguments
+      await ClientCreationRules.validate(newClient, { abortEarly: false });
+
+      // Check if the Username is taken
+      let user = await ClientModel.findOne({
+        name,
+      });
+      if (user) {
+        throw new ApolloError('Client name is already taken.', '403');
+      }
+
+      // New User's Account can be created
+      user = new ClientModel(newClient);
+
+      // Save the user to the database
+      let result = await user.save();
+
+      return {result};
+    } catch (err) {
+      throw new ApolloError(err.message);
+    }
+  },
+},
 };
