@@ -9,7 +9,7 @@ export default gql`
     createClient(newClient: ClientInput!): Client! @isAuth
   }
 
-  input ClientInput  {
+  input ClientInput {
     userId: ID!
     name: String!
     unifiedVatNumber: Int!
