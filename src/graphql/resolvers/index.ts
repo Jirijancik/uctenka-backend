@@ -1,5 +1,5 @@
-import client from './client';
+import business from './business';
 import post from './post';
 import user from './user';
 
-export default [post, user, client];
+export default [post, user, business];

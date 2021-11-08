@@ -1,4 +1,4 @@
-import { ClientModel } from "../src/models/Client";
+import { ClientModel } from "../src/models/Business";
 import { UserModel } from "../src/models/User";
 import { BusinessType } from "../src/types/businessType";
 import { Currency } from "../src/types/currency";

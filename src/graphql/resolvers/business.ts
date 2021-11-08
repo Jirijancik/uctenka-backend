@@ -1,26 +1,25 @@
 /* eslint-disable no-empty-pattern */
 
 import { ApolloError } from "apollo-server-errors";
-import { ClientCreationRules } from "../../validation/client";
+import { BusinessCreationRules } from "../../validation/business";
 
 export default {
   Query: {
     /**
-     * @DESC to Get all the Clients
+     * @DESC to Get all the Business
      * @Access Private
      */
-    getClients: async (parent, args, ctx, info): Promise<any> => {
-      const { ClientModel } = ctx
-      const clients = await ClientModel.find();
+    getBusinesses: async (parent, args, ctx, info): Promise<any> => {
+      const { BusinessModel } = ctx
+      const business = await BusinessModel.find();
 
 
-      console.log("Hello", info);
 
-      if (!clients) {
+      if (!business) {
         throw new Error('Unathorized Access');
       }
 
-      return clients;
+      return business;
     },
   },
 
@@ -31,23 +30,23 @@ Mutation: {
    * @Params newUser
    * @Access Private
    */
-  createClient: async (_, { newClient }, { ClientModel }) => {
+  createBusiness: async (_, { newBusiness }, { BusinessModel }) => {
     try {
-      const { name } = newClient;
+      const { name } = newBusiness;
 
       // Validate Incoming New User Arguments
-      await ClientCreationRules.validate(newClient, { abortEarly: false });
+      await BusinessCreationRules.validate(newBusiness, { abortEarly: false });
 
       // Check if the Username is taken
-      let user = await ClientModel.findOne({
+      let user = await BusinessModel.findOne({
         name,
       });
       if (user) {
-        throw new ApolloError('Client name is already taken.', '403');
+        throw new ApolloError('Business name is already taken.', '403');
       }
 
       // New User's Account can be created
-      user = new ClientModel(newClient);
+      user = new BusinessModel(newBusiness);
 
       // Save the user to the database
       let result = await user.save();

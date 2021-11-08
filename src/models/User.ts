@@ -2,19 +2,16 @@ import { model, ObjectId, Schema } from 'mongoose';
 
 
 export interface User {
-  username?: string
+  businessPartners?: ObjectId[]
+  businesses?: ObjectId[],
   email: string
   firstName: string
   lastName: string
   password: string
-  clients?: [ObjectId],
 }
 
 const UserSchema = new Schema<User>(
   {
-    username: {
-      type: String,
-    },
     email: {
       type: String,
       required: true,
@@ -31,7 +28,8 @@ const UserSchema = new Schema<User>(
       type: String,
       required: true,
     },
-    clients: [Schema.Types.ObjectId],
+    businesses: [Schema.Types.ObjectId],
+    businessPartners: [Schema.Types.ObjectId],
   },
   {
     timestamps: true,

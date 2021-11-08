@@ -24,7 +24,8 @@ export default gql`
     firstName: String!
     createdAt: String
     updatedAt: String
-    clients: [ID]
+    businesses: [ID]
+    businessPartners: [ID]
   }
 
   type AuthUser {

@@ -2,14 +2,14 @@ import { gql } from 'apollo-server-express';
 
 export default gql`
   extend type Query {
-    getClients: [Client] @isAuth
+    getBusinesses: [Business] @isAuth
   }
 
   extend type Mutation {
-    createClient(newClient: ClientInput!): Client! @isAuth
+    createBusiness(newBusiness: BusinessInput!): Business! @isAuth
   }
 
-  input ClientInput {
+  input BusinessInput {
     userId: ID!
     name: String!
     unifiedVatNumber: Int!
@@ -29,7 +29,7 @@ export default gql`
     paymentMethod: String
   }
 
-  type Client {
+  type Business {
     _id: ID!
     userId: ID!
     name: String!
@@ -44,10 +44,10 @@ export default gql`
     street: String!
     city: String!
     postcode: Int!
-    mobilePhone: String!
-    typeOfBussiness: String
+    mobilePhone: String
+    typeOfBussiness: String!
     accountNumber: Int
-    paymentMethod: String
+    paymentMethod: String!
     createdAt: String
     updatedAt: String
   }

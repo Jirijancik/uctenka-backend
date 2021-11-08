@@ -1,6 +1,6 @@
 import baseDefs from './baseDefs';
-import client from './client';
+import business from './business';
 import post from './post';
 import user from './user';
 
-export default [post, user, client, baseDefs];
+export default [post, user, business, baseDefs];

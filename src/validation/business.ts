@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 
 /**
- * Client MODEL Validation Rules
+ * Business MODEL Validation Rules
  */
 const accountBalance = yup.number().required('Account balance is required.');
 const city = yup.string().required('City  is required.');
@@ -14,8 +14,8 @@ const postcode = yup.number().required('Postcode  is required.');
 const street = yup.string().required('Street balance is required.');
 const unifiedVatNumber = yup.number().required('Unified Vat Number is required.').min(3, 'Last name should have atleast 3 characters.');
 
-// Client Creation Validation Schema
-export const ClientCreationRules = yup.object().shape({
+// Business Creation Validation Schema
+export const BusinessCreationRules = yup.object().shape({
   accountBalance,
   city,
   country,
