@@ -10,45 +10,44 @@ export default gql`
   }
 
   input BusinessInput {
-    userId: ID!
-    name: String!
-    unifiedVatNumber: Int!
-    vatNumber: Int
-    currency: Int!
-    accountBalance: Int!
-    paymentTerms: String
-    contactPerson: String
-    email: String!
-    country: String!
-    street: String!
-    city: String!
-    postcode: Int!
-    mobilePhone: String!
-    typeOfBussiness: String
     accountNumber: Int
+    bussinessType: String!
+    city: String!
+    contactPerson: String
+    country: String!
+    currency: String!
+    email: String!
+    mobilePhone: String!
+    name: String!
     paymentMethod: String
+    paymentTerms: Number
+    postcode: Int!
+    street: String!
+    unifiedVatNumber: Int!
+    userId: ID!
+    vatNumber: Int
   }
 
   type Business {
     _id: ID!
-    userId: ID!
-    name: String!
-    unifiedVatNumber: Int!
-    vatNumber: Int
-    currency: Int!
     accountBalance: Int!
-    paymentTerms: String
-    contactPerson: String
-    email: String!
-    country: String!
-    street: String!
-    city: String!
-    postcode: Int!
-    mobilePhone: String
-    typeOfBussiness: String!
     accountNumber: Int
-    paymentMethod: String!
+    bussinessType: String!
+    city: String!
+    contactPerson: String
+    country: String!
     createdAt: String
+    currency: String!
+    email: String!
+    mobilePhone: String
+    name: String!
+    paymentMethod: Number
+    paymentTerms: Number
+    postcode: Int!
+    street: String!
+    unifiedVatNumber: Int!
     updatedAt: String
+    userId: ID!
+    vatNumber: Int
   }
 `;

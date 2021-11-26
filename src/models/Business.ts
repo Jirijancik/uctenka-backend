@@ -1,9 +1,11 @@
-import { model, Schema } from 'mongoose';
+import { model, Schema, Types } from 'mongoose';
 import { BusinessType } from '../types/businessType';
 import { Currency } from '../types/currency';
 import { PaymentMethod } from '../types/paymentMethod';
+import { PaymentTerms } from '../types/paymentTerms';
 
 interface Business {
+  readonly _id: Types.ObjectId; 
   accountBalance: number;
   accountNumber?: number;
   city: string;
@@ -14,16 +16,16 @@ interface Business {
   mobilePhone?: string;
   name: string;
   paymentMethod?: PaymentMethod;
-  paymentTerms: number;
+  paymentTerms?: PaymentTerms;
   postcode: number;
   street: string;
-  typeOfBussiness: BusinessType;
+  bussinessType: BusinessType;
   unifiedVatNumber: number;
-  userId: Schema.Types.ObjectId;
+  userId: Types.ObjectId;
   vatNumber?: number;
 }
 
-const BusinessSchema = new Schema<Business>(
+const BusinessSchema = new Schema<Omit<Business, "_id">>(
   {
     userId: {
       type: Schema.Types.ObjectId,
@@ -49,8 +51,7 @@ const BusinessSchema = new Schema<Business>(
       required: true,
     },
     paymentTerms: {
-      type: Number,
-      required: true,
+      type: Number
     },
     contactPerson: {
       type: String,
@@ -77,9 +78,10 @@ const BusinessSchema = new Schema<Business>(
     },
     mobilePhone: {
       type: String,
+      required: true,
     },
-    typeOfBussiness: {
-      type: Number,
+    bussinessType: {
+      type: String,
       required: true,
     },
     accountNumber: {
@@ -91,6 +93,8 @@ const BusinessSchema = new Schema<Business>(
   },
   {
     timestamps: true,
+    _id: true,
+    versionKey: false
   },
 );
 
