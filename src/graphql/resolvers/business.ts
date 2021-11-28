@@ -40,12 +40,12 @@ Mutation: {
       await BusinessCreationRules.validate(newBusiness, { abortEarly: false });
 
      // Check if the Username is taken
-      // let user = await BusinessModel.findOne({
-      //   name,
-      // });
-      // if (user) {
-      //   throw new ApolloError('Business name is already taken.', '403');
-      // }
+      let user = await BusinessModel.findOne({
+        name: newBusiness?.name,
+      });
+      if (user) {
+        throw new ApolloError('Business name is already taken.', '403');
+      }
 
       const userID = ctx?.req?.session?.user?._id
 
