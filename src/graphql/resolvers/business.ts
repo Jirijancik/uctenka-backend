@@ -30,26 +30,32 @@ Mutation: {
    * @Params newUser
    * @Access Private
    */
-  createBusiness: async (_, { newBusiness }, { BusinessModel }) => {
-    try {
-      const { name } = newBusiness;
+  createBusiness: async (parent, args, ctx, info) => {
+    // Validate Incoming User Credentials
+    const { newBusiness } = args; 
+    const { BusinessModel } = ctx;
 
-      // Validate Incoming New User Arguments
+    try {
+     // Validate Incoming New User Arguments
       await BusinessCreationRules.validate(newBusiness, { abortEarly: false });
 
-      // Check if the Username is taken
-      let user = await BusinessModel.findOne({
-        name,
-      });
-      if (user) {
-        throw new ApolloError('Business name is already taken.', '403');
-      }
+     // Check if the Username is taken
+      // let user = await BusinessModel.findOne({
+      //   name,
+      // });
+      // if (user) {
+      //   throw new ApolloError('Business name is already taken.', '403');
+      // }
+
+      const userID = ctx?.req?.session?.user?._id
+
 
       // New User's Account can be created
-      user = new BusinessModel(newBusiness);
+      const business = new BusinessModel({...newBusiness, userID});
 
+      console.log({...newBusiness, userID}, ctx?.req?.session, "IN BUSINESS")
       // Save the user to the database
-      let result = await user.save();
+      const result = await business.save();
 
       return {result};
     } catch (err) {

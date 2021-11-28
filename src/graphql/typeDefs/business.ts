@@ -20,11 +20,10 @@ export default gql`
     mobilePhone: String!
     name: String!
     paymentMethod: String
-    paymentTerms: Number
+    paymentTerms: String
     postcode: Int!
     street: String!
     unifiedVatNumber: Int!
-    userId: ID!
     vatNumber: Int
   }
 
@@ -39,10 +38,10 @@ export default gql`
     createdAt: String
     currency: String!
     email: String!
-    mobilePhone: String
+    mobilePhone: String!
     name: String!
-    paymentMethod: Number
-    paymentTerms: Number
+    paymentMethod: String
+    paymentTerms: String
     postcode: Int!
     street: String!
     unifiedVatNumber: Int!

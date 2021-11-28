@@ -11,9 +11,12 @@ export default {
      * @Params { email, password }
      * @Access Public
      */
-    loginUser: async (_, { email, password }, { UserModel }) => {
+    loginUser: async (parent, args, ctx, info) => {
       // Validate Incoming User Credentials
-      
+      const { email, password } = args; 
+      const { UserModel } = ctx;
+
+
       await UserAuthenticationRules.validate({ email, password }, { abortEarly: false });
       // Find the user from the database
       let user = await UserModel.findOne({
@@ -25,9 +28,14 @@ export default {
         throw new ApolloError('Email or password were incorrect', '404');
       }
 
+      if(!ctx?.req?.session?.user) {
+        ctx.req.session.user = user
+      }
+
+      console.log(ctx?.req?.session, "IN USER")
+
       // If user is found then compare the password
       const isMatch = await compare(password, user.password);
-      console.log(user, password, isMatch);
       
       // If Password don't match
       if (!isMatch) {

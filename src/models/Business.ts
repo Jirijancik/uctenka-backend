@@ -7,19 +7,19 @@ import { PaymentTerms } from '../types/paymentTerms';
 interface Business {
   readonly _id: Types.ObjectId; 
   accountBalance: number;
-  accountNumber?: number;
+  accountNumber: number;
+  bussinessType: BusinessType;
   city: string;
   contactPerson?: string;
   country: string;
   currency: Currency;
   email: string;
-  mobilePhone?: string;
+  mobilePhone: string;
   name: string;
   paymentMethod?: PaymentMethod;
   paymentTerms?: PaymentTerms;
   postcode: number;
   street: string;
-  bussinessType: BusinessType;
   unifiedVatNumber: number;
   userId: Types.ObjectId;
   vatNumber?: number;
@@ -51,7 +51,7 @@ const BusinessSchema = new Schema<Omit<Business, "_id">>(
       required: true,
     },
     paymentTerms: {
-      type: Number
+      type: String,
     },
     contactPerson: {
       type: String,
@@ -88,7 +88,7 @@ const BusinessSchema = new Schema<Omit<Business, "_id">>(
       type: Number,
     },
     paymentMethod: {
-      type: Number,
+      type: String,
     },
   },
   {

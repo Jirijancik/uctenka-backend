@@ -1,6 +1,7 @@
 export enum PaymentTerms {
-    AfterTwoWeeks=14,
-    AfterMonth=30,
-    AfterSixtyDays=60,
-    AfterNinetyDays=90,
-}
+    AfterTwoWeeks = 'afterTwoWeeks',
+    AfterMonth = 'afterMonth',
+    AfterSixtyDays = 'afterSixtyDays',
+    AfterNinetyDays = 'afterNinetyDays',
+  }
+  
