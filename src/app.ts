@@ -8,7 +8,7 @@ import express from 'express';
 import session from 'express-session';
 import mongoose from 'mongoose';
 import { join } from 'path';
-import { DB, IN_PROD, PORT, SESSION_SECRET } from './config';
+import { DB, PORT, SESSION_SECRET } from './config';
 import resolvers from './graphql/resolvers';
 import typeDefs from './graphql/typeDefs';
 import AuthMiddleware from './middlewares/auth';
@@ -41,9 +41,9 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   // schemaDirectives,
-  playground: !IN_PROD,
+  // playground: !IN_PROD,
   context: ({ req }) => {
-    const { user, isAuth } = req;
+    const { user, isAuth }  = req as any;
 
     return {
       req,
@@ -53,7 +53,7 @@ const server = new ApolloServer({
     };
   },
   plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
-} as any);
+});
 
 // Function to start express and apollo server
 const startApp = async () => {
