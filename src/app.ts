@@ -42,8 +42,9 @@ const server = new ApolloServer({
   resolvers,
   // schemaDirectives,
   // playground: !IN_PROD,
-  context: ({ req }) => {
-    const { user, isAuth }  = req as any;
+  context: ({ req }: any) => {
+
+    const { user, isAuth }  = req;
 
     return {
       req,
