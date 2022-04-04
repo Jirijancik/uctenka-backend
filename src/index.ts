@@ -50,9 +50,9 @@ async function bootstrap() {
         resave: false,
         saveUninitialized: false,
         cookie: {
-          httpOnly: true,
+          httpOnly: false,
           secure: config.get<string>("NODE_ENV") === "production",
-          maxAge: 1000 * 60 * 60 * 24 * 7 * 365, // 7 years
+          maxAge: 1000 * 60 * 60 * 24 * 5, // 5 days
         },
       })
     );
