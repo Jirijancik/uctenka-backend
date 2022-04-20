@@ -10,10 +10,9 @@ import { Context } from "../types/context";
 
 class UserService {
   async createUser(input: CreateUserInput) {
+// send email nodemailer
 
 
-
-    
     return UserModel.create(input);
   }
 
@@ -39,7 +38,7 @@ class UserService {
     }
 
     if (!user.confirmed) {
-      throw new ApolloError("Please confirm your email befor logging in!");
+      throw new ApolloError("Please confirm your email befor logging in!", "unconfirmedEmail");
     }
 
     // sign a jwt

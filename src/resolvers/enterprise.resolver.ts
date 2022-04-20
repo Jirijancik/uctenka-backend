@@ -1,7 +1,7 @@
 import { ApolloError } from "apollo-server";
 import { Arg, Authorized,  Ctx, Mutation, Query, Resolver, UseMiddleware,  } from "type-graphql";
 import { resolveTime } from "../middlewares/resolveTime";
-import { CreateEnterpriseInput, Enterprise, GetEnterpriseInput } from "../schema/enterprise.schema";
+import { CreateEnterpriseInput, EditEnterpriseInput, Enterprise, GetEnterpriseInput } from "../schema/enterprise.schema";
 import EnterpriseService from "../service/user.enterprise";
 import { Context } from "../types/context";
 
@@ -31,10 +31,23 @@ export default class EnterpriseResolver {
   deleteEnterprise(@Arg("input") input: GetEnterpriseInput) {
     return this.enterpriseService.deleteEnterprise(input);
   }
+
+  @Authorized()
+  @UseMiddleware(resolveTime)
+  @Mutation(() => Enterprise)
+  editEnterprise(@Arg("input",  { nullable: true }) input: EditEnterpriseInput , @Arg("_id") _id: string ) {
+    return this.enterpriseService.editEnterprise(input, _id);
+  }
   
   @Query(() => [Enterprise])
-  enterprises() {
-    return this.enterpriseService.findEnterprises();
+  enterprises(@Ctx() context: Context) {
+    const {userId} = context.req.session;
+
+    if (!userId){
+      throw new ApolloError("User is not permitted for this operation!");
+    }
+
+    return this.enterpriseService.findEnterprises(userId);
   }
 
   @Query(() => Enterprise)

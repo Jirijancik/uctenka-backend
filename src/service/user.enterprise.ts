@@ -1,4 +1,4 @@
-import { CreateEnterpriseInput, EnterpriseModel, GetEnterpriseInput } from "../schema/enterprise.schema";
+import { CreateEnterpriseInput, EditEnterpriseInput, EnterpriseModel, GetEnterpriseInput } from "../schema/enterprise.schema";
 import { User } from "../schema/user.schema.ts";
 
 
@@ -12,9 +12,9 @@ class EnterpriseService {
     return EnterpriseModel.findOne(input).lean();
   }
 
-  async findEnterprises() {
+  async findEnterprises(userId: User["_id"]) {
     // Pagination login
-    return EnterpriseModel.find().lean();
+    return EnterpriseModel.find({user: userId}).lean();
   }
 
   async deleteEnterprise(id: GetEnterpriseInput) {
@@ -22,6 +22,10 @@ class EnterpriseService {
     return EnterpriseModel.findByIdAndDelete(id);
   }
 
+  async editEnterprise(input: EditEnterpriseInput, _id: string) {
+
+    return EnterpriseModel.findByIdAndUpdate(_id , input);
+  }
 }
 
 export default EnterpriseService;

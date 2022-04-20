@@ -171,9 +171,96 @@ export class CreateEnterpriseInput {
   vatNumber: number;
 }
 
+
+@InputType()
+export class EditEnterpriseInput {
+  @IsNotEmpty()
+  @IsNumber()
+  @Min(1)
+  @Field(() => Number, { nullable: true })
+  accountNumber: number;
+
+  @IsNotEmpty()
+  @IsEnum(BusinessType)
+  @Field(() => String, { nullable: true })
+  bussinessType: BusinessType;
+
+  @IsNotEmpty()
+  @IsString()
+  @Length(1, 150)
+  @Field(() => String, { nullable: true })
+  city: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 150)
+  @Field(() => String, { nullable: true })
+  contactPerson: string;
+
+  @IsNotEmpty()
+  @IsString()
+  @Length(1, 150)
+  @Field(() => String, { nullable: true })
+  country: string;
+
+  @IsNotEmpty()
+  @IsEnum(Currency)
+  @Field(() => String, { nullable: true })
+  currency: Currency;
+
+  @IsNotEmpty()
+  @IsEmail()
+  @Field(() => String, { nullable: true })
+  email: string;
+
+  @IsNotEmpty()
+  @IsNumber()
+  @Field(() => Number, { nullable: true })
+  mobilePhone: number;
+
+  @IsNotEmpty()
+  @IsString()
+  @Length(1, 150)
+  @Field(() => String, { nullable: true })
+  name: string;
+
+  @IsOptional()
+  @IsEnum(PaymentMethod)
+  @Field(() => String, { nullable: true })
+  paymentMethod: PaymentMethod;
+
+  @IsOptional()
+  @IsEnum(PaymentTerms)
+  @Field(() => String, { nullable: true })
+  paymentTerms: PaymentTerms;
+
+  @IsNotEmpty()
+  @IsNumber()
+  @Field(() => Number, { nullable: true })
+  postcode: number;
+
+  @IsNotEmpty()
+  @IsString()
+  @Length(1, 150)
+  @Field(() => String, { nullable: true })
+  street: string;
+
+  @IsNotEmpty()
+  @IsNumber()
+  @Field(() => Number, { nullable: true })
+  unifiedVatNumber: number;
+
+  @IsOptional()
+  @IsNumber()
+  @Field(() => Number, { nullable: true })
+  vatNumber: number;
+}
+
 @InputType()
 export class GetEnterpriseInput {
   @IsNotEmpty()
   @Field(() => String)
   _id: string;
 }
+
+
